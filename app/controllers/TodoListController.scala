@@ -1,5 +1,6 @@
 package controllers
 
+import core.SparkStreamingFromSocket
 import models.{NewTodoListItem, TodoListItem}
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
 
@@ -19,12 +20,15 @@ class TodoListController @Inject()(val controllerComponents: ControllerComponent
   todoList += TodoListItem(1, "test", true)
   todoList += TodoListItem(2, "some other value", false)
 
+
+
   /**
    * curl localhost:9000/todo
    *
    * @return
    */
   def getAll(): Action[AnyContent] = Action {
+    SparkStreamingFromSocket.run()
     if (todoList.isEmpty) {
       NoContent
     } else {
