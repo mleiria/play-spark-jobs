@@ -16,22 +16,7 @@ object SparkStreamingFromSocket {
 
     spark.sparkContext.setLogLevel("ERROR")
 
-
-    val df = spark.readStream
-      .format("socket")
-      .option("host", "localhost")
-      .option("port", "9090")
-      .load()
-
-    val wordsDF = df.select(explode(split(df("value"), " ")).alias("word"))
-    val count = wordsDF.groupBy("word").count()
-    val query = count.writeStream
-      .format("console")
-      .outputMode("complete")
-      .start()
-      .awaitTermination()
-
-    println("Query: " + query.toString)
+    println("Query: ")
     println("End...")
   }
 }
