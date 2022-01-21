@@ -1,6 +1,6 @@
 package controllers
 
-import core.SparkStreamingFromSocket
+import core.{MovieSimilarities, SparkStreamingFromSocket}
 import models.{NewTodoListItem, TodoListItem}
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
 
@@ -28,7 +28,7 @@ class TodoListController @Inject()(val controllerComponents: ControllerComponent
    * @return
    */
   def getAll(): Action[AnyContent] = Action {
-    SparkStreamingFromSocket.run()
+    MovieSimilarities.run()
     if (todoList.isEmpty) {
       NoContent
     } else {
