@@ -2,6 +2,7 @@ package core
 
 import org.apache.log4j._
 import org.apache.spark._
+import org.apache.spark.sql.SparkSession
 
 import java.nio.charset.CodingErrorAction
 import scala.io.{Codec, Source}
@@ -95,8 +96,15 @@ object MovieSimilarities {
     Logger.getLogger("org").setLevel(Level.ERROR)
     
      // Create a SparkContext using every core of the local machine
-    val sc = new SparkContext("spark://192.168.10.4:7077", "MovieSimilarities")
-    
+    //val sc = new SparkContext("spark://192.168.10.4:7077", "MovieSimilarities")
+    val spark: SparkSession = SparkSession.builder()
+      .master("spark://192.168.10.4:7077")
+      .appName("SparkByExample")
+      .getOrCreate()
+
+    val sc = spark.sparkContext;
+
+
     println("\nLoading movie names...")
     val nameDict = loadMovieNames()
     
