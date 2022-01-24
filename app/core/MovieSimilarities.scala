@@ -98,7 +98,7 @@ object MovieSimilarities {
      // Create a SparkContext using every core of the local machine
     //val sc = new SparkContext("spark://192.168.10.4:7077", "MovieSimilarities")
     val spark: SparkSession = SparkSession.builder()
-      .master("spark://127.0.0.1:7077")
+      .master("spark://manuel-VB1:7077")
       .appName("SparkByExample")
       .getOrCreate()
 
